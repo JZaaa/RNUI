@@ -1,0 +1,46 @@
+<div class="doc-middle">
+<span class="tag tag-success tag-mark" title="weui.js">weui.js</span>
+<p class="text-danger small">gallery 带删除按钮的图片预览，主要是配合图片上传使用</p>
+<h4 class="text-muted">代码演示</h4>
+<div class="doc-panel">
+    <div class="doc-panel-footer">
+        <div class="copy-content">
+            <pre class="prettyprint lang-javascript linenums" id="foo">
+function actionSheet() {
+    let url = './doc/img/pic_article.png';
+    let gallery = weui.gallery(url, {
+        className: 'custom-classname',
+        onDelete: function(){
+            weui.confirm('确定删除该图片？',
+                function(){
+                    console.log('删除');
+                    hide();
+                }
+            );
+        }
+    });
+
+    function hide() {
+        gallery.hide(function() {
+            console.log('`gallery` has been hidden');
+        });
+    }
+}
+            </pre>
+            <button class="btn-copy" data-clipboard-target="#foo" data-toggle="copy">
+                <img class="clippy" src="./doc/js/clipboard/clippy.svg" alt="copy">
+            </button>
+        </div>
+    </div>
+</div>
+
+</div>
+
+<div class="doc-right">
+    <div class="mobile-demo">
+        <iframe frameborder="0" src="./doc/example/gallery.html"></iframe>
+    </div>
+</div>
+
+
+

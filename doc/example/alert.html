@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>demo</title>
+    <link rel="stylesheet" type="text/css" href="../../lib/weui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../doc/icon/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="../../doc/css/demo.css" />
+    <link rel="stylesheet/less" type="text/css" href="../../build/less/app.less" />
+    <script src="../../lib/less.min.js" type="text/javascript"></script>
+</head>
+<body>
+<div class="nav-bar shadow nav-bar-fixed">
+    <div class="nav-bar-title">标题</div>
+    <div class="nav-bar-right" onclick="javascript:location.reload();">
+        <span class="nav-bar-text">
+            刷新
+        </span>
+    </div>
+</div>
+<div class="doc-panel-body">
+    <div id="alert-btn">
+        <button type="button" class="weui-btn weui-btn_mini weui-btn_primary">普通的alert</button>
+        <button type="button" class="weui-btn weui-btn_mini weui-btn_default">带回调的alert</button>
+        <button type="button" class="weui-btn weui-btn_mini weui-btn_warn">手动关闭的alert</button>
+        <button type="button" class="weui-btn weui-btn_mini bg-brown">自定义标题的alert</button>
+        <button type="button" class="weui-btn weui-btn_mini bg-primary">带回调的自定义标题的alert</button>
+        <button type="button" class="weui-btn weui-btn_mini weui-btn_warn">自定义按钮的alert</button>
+        <button type="button" class="weui-btn weui-btn_mini weui-btn_default">多次使用</button>
+    </div>
+</div>
+
+<script src="../../lib/jquery.min.js"></script>
+<script src="../../build/js/app.js"></script>
+<script src="../../lib/weui.js/dist/weui.js"></script>
+<script>
+    $('#alert-btn').on('click', 'button', function () {
+        let index = $(this).index();
+        switch (index) {
+            case 0:
+                weui.alert('普通的alert');
+                break;
+            case 1:
+                weui.alert('带回调的alert', function(){ console.log('ok') });
+                break;
+            case 2:
+                let alertDom = weui.alert('手动关闭的alert，本示例3s后自动关闭', function(){
+                    return false; // 不关闭弹窗，可用alertDom.hide()来手动关闭
+                });
+                setTimeout(function(){alertDom.hide()},3000);
+                break;
+            case 3:
+                weui.alert('自定义标题的alert', { title: '自定义标题' });
+                break;
+            case 4:
+                weui.alert('带回调的自定义标题的alert', function(){
+                    console.log('ok')
+                }, {
+                    title: '自定义标题'
+                });
+                break;
+            case 5:
+                weui.alert('自定义按钮的alert', {
+                    title: '自定义按钮的alert',
+                    buttons: [{
+                        label: 'OK',
+                        type: 'primary',
+                        onClick: function(){ console.log('ok') }
+                    }]
+                });
+                break;
+            default:
+                // 多次使用
+                let alert = weui.alert('hello');
+                alert.hide(function(){
+                    weui.alert('world');
+                });
+                break;
+        }
+
+
+    })
+
+
+</script>
+</body>
+</html>

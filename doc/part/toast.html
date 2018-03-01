@@ -1,0 +1,87 @@
+<div class="doc-middle">
+<span class="tag tag-success tag-mark" title="weui.js">weui.js</span>
+<span class="tag tag-primary tag-mark" title="自定义">custom</span>
+<p class="text-danger small">修改weui.js 源码，添加多种提醒样式</p>
+<h4 class="text-muted">代码演示</h4>
+<div class="doc-panel">
+
+    <div class="doc-panel-footer">
+        <div class="copy-content">
+            <pre class="prettyprint lang-javascript linenums" id="foo">
+weui.toast('操作成功', 3000);
+weui.toast('操作成功', {
+    duration: 3000,
+    className: 'custom-classname',
+    style: 'ok',
+    callback: function(){ console.log('close') }
+});
+weui.toast('取消操作', 'cancel');
+weui.toast('操作成功', 'ok');
+weui.toast('操作失败', 'warning');
+            </pre>
+            <button class="btn-copy" data-clipboard-target="#foo" data-toggle="copy">
+                <img class="clippy" src="./doc/js/clipboard/clippy.svg" alt="copy">
+            </button>
+        </div>
+    </div>
+</div>
+<h4 class="text-muted">toast API</h4>
+<table>
+    <thead>
+    <tr>
+        <th>参数</th>
+        <th>说明</th>
+        <th>类型</th>
+        <th>默认值</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>content</td>
+        <td>toast的文字</td>
+        <td><code>string</code></td>
+        <td>-</td>
+    </tr>
+    <tr>
+        <td>options</td>
+        <td>配置项或回调</td>
+        <td><code>Object | function</code></td>
+        <td>-</td>
+    </tr>
+    <tr>
+        <td>[options.duration]</td>
+        <td>多少毫秒后关闭toast</td>
+        <td><code>number</code></td>
+        <td>3000</td>
+    </tr>
+    <tr>
+        <td>[options.callback]</td>
+        <td>关闭后的回调</td>
+        <td><code>function</code></td>
+        <td>-</td>
+    </tr>
+    <tr>
+        <td>[options.className]</td>
+        <td>自定义类名</td>
+        <td><code>string</code></td>
+        <td>-</td>
+    </tr>
+    <tr>
+        <td>[options.style]</td>
+        <td>提醒类型,cancel | warning | ok | null</td>
+        <td><code>string</code></td>
+        <td>null</td>
+    </tr>
+    </tbody>
+</table>
+
+
+</div>
+<div class="doc-right">
+    <div class="mobile-demo">
+        <iframe frameborder="0" src="./doc/example/toast.html"></iframe>
+    </div>
+</div>
+
+
+

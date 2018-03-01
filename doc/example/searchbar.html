@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>demo</title>
+    <link rel="stylesheet" type="text/css" href="../../lib/weui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../doc/icon/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="../../doc/css/demo.css" />
+    <link rel="stylesheet/less" type="text/css" href="../../build/less/app.less" />
+    <script src="../../lib/less.min.js" type="text/javascript"></script>
+</head>
+<body>
+
+<div class="doc-panel-body">
+    <div class="weui-search-bar" id="searchBar1">
+        <form class="weui-search-bar__form">
+            <div class="weui-search-bar__box">
+                <i class="weui-icon-search"></i>
+                <input type="search" class="weui-search-bar__input" placeholder="搜索" required="">
+                <a href="javascript:" class="weui-icon-clear"></a>
+            </div>
+            <label class="weui-search-bar__label">
+                <i class="weui-icon-search"></i>
+                <span>搜索</span>
+            </label>
+        </form>
+        <a href="javascript:" class="weui-search-bar__cancel-btn">取消</a>
+    </div>
+</div>
+
+<script src="../../lib/jquery.min.js"></script>
+<script src="../../build/js/app.js"></script>
+<script src="../../lib/weui.js/dist/weui.js"></script>
+<script>
+    weui.searchBar('#searchBar1');
+</script>
+</body>
+</html>

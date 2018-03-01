@@ -1,0 +1,110 @@
+<div class="doc-middle">
+    <span class="tag tag-success tag-mark" title="weui">weui</span>
+    <span class="tag tag-danger tag-mark" title="jQuery">jQuery</span>
+    <p class="text-danger small">左滑插件(jqweui) -- 地址<a href="http://jqweui.com/components#swipeout" target="_blank">http://jqweui.com/components#swipeout</a></p>
+    <h4 class="text-muted">代码演示</h4>
+    <div class="doc-panel">
+        <div class="doc-panel-footer">
+            <div class="copy-content">
+            <pre class="prettyprint lang-html linenums pre-scrollable" id="foo">
+<div class="weui-cells__title">列表项</div>
+<div class="weui-cells">
+    <div class="weui-cell">
+        <div class="weui-cell__bd">
+            <p>标题文字</p>
+        </div>
+        <div class="weui-cell__ft">说明文字</div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><img src="./doc/img/pic_article.png" alt="" style="width:20px;margin-right:5px;display:block"></div>
+        <div class="weui-cell__bd">
+            <div>标题文字</div>
+        </div>
+        <div class="weui-cell__ft">说明文字</div>
+    </div>
+    <a class="weui-cell weui-cell_access" href="javascript:;">
+        <div class="weui-cell__bd">
+            <div>cell standard</div>
+        </div>
+        <div class="weui-cell__ft">
+        </div>
+    </a>
+    <a class="weui-cell weui-cell_access" href="javascript:;">
+        <div class="weui-cell__bd">
+            <div>cell standard</div>
+        </div>
+        <div class="weui-cell__ft">说明文字</div>
+    </a>
+    <a class="weui-cell weui-cell_access" href="javascript:;">
+        <div class="weui-cell__hd"><img src="./doc/img/pic_article.png" alt="" style="width:20px;margin-right:5px;display:block"></div>
+        <div class="weui-cell__bd">
+            <div>cell standard</div>
+        </div>
+        <div class="weui-cell__ft">说明文字</div>
+    </a>
+
+    <div class="weui-cell weui-cell_swiped">
+        <div class="weui-cell__bd">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    左滑列表
+                </div>
+                <div class="weui-cell__ft">向左滑动试试</div>
+            </div>
+        </div>
+        <div class="weui-cell__ft">
+            <a class="weui-swiped-btn weui-swiped-btn_warn" href="javascript:">删除</a>
+            <a class="weui-swiped-btn weui-swiped-btn_default" href="javascript:">关闭</a>
+        </div>
+    </div>
+</div>
+            </pre>
+                <button class="btn-copy" data-clipboard-target="#foo" data-toggle="copy">
+                    <img class="clippy" src="./doc/js/clipboard/clippy.svg" alt="copy">
+                </button>
+            </div>
+        </div>
+    </div>
+    <h4 class="text-muted">swipeout API</h4>
+    <p class="text-danger small">注意：同时仅能打开一个滑动列表</p>
+    <table>
+        <thead>
+        <tr>
+            <th>拓展方法</th>
+            <th>说明</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><code>$(selector).swipeout('open')</code></td>
+            <td>打开滑动列表</td>
+        </tr>
+        <tr>
+            <td><code>$(selector).swipeout('close')</code></td>
+            <td>关闭滑动列表</td>
+        </tr>
+        </tbody>
+    </table>
+    <h4 class="text-muted">使用示例</h4>
+    <div class="copy-content">
+    <pre class="prettyprint lang-javascript linenums" id="foo1">
+$('.weui-cell_swiped').swipeout()
+$('.weui-cell_swiped').swipeout('open')
+$('.weui-cell_swiped').swipeout('close')
+    </pre>
+        <button class="btn-copy" data-clipboard-target="#foo1" data-toggle="copy">
+            <img class="clippy" src="./doc/js/clipboard/clippy.svg" alt="copy">
+        </button>
+    </div>
+
+
+
+</div>
+
+<div class="doc-right">
+    <div class="mobile-demo">
+        <iframe frameborder="0" src="./doc/example/list.html"></iframe>
+    </div>
+</div>
+
+

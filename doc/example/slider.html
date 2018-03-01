@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>demo</title>
+    <link rel="stylesheet" type="text/css" href="../../lib/weui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../doc/icon/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="../../doc/css/demo.css" />
+</head>
+<body>
+
+<div class="doc-panel-body">
+    <p>&nbsp;</p>
+    <div class="weui-slider-box">
+        <div id="slider" class="weui-slider">
+            <div class="weui-slider__inner">
+                <div class="weui-slider__track"></div>
+                <div class="weui-slider__handler"></div>
+            </div>
+        </div>
+        <div id="sliderValue" class="weui-slider-box__value"></div>
+    </div>
+    <p>&nbsp;</p>
+    <div class="weui-slider-box">
+        <div id="sliderStep" class="weui-slider">
+            <div class="weui-slider__inner">
+                <div class="weui-slider__track"></div>
+                <div class="weui-slider__handler"></div>
+            </div>
+        </div>
+        <div id="sliderStepValue" class="weui-slider-box__value"></div>
+    </div>
+    <p>&nbsp;</p>
+    <div class="weui-slider-box">
+        <div id="sliderBlock" class="weui-slider">
+            <div class="weui-slider__inner">
+                <div class="weui-slider__track"></div>
+                <div class="weui-slider__handler"></div>
+            </div>
+        </div>
+        <div id="sliderBlockValue" class="weui-slider-box__value"></div>
+    </div>
+</div>
+<script src="../../lib/jquery.min.js"></script>
+<script src="../../build/js/app.js"></script>
+<script src="../../lib/weui.js/dist/weui.js"></script>
+<script>
+    /* slider 因为需要获取长度，所以必须要在slider显示的时候才调用weui.slider*/
+    var isSetSlider = false;
+    function setSlider() {
+        if (isSetSlider) return;
+        isSetSlider = true;
+
+        // 普通slider
+        var sliderValue = document.getElementById("sliderValue");
+        weui.slider('#slider', {
+            defaultValue: 50,
+            onChange: function onChange(percent) {
+                sliderValue.innerHTML = Math.round(percent);
+                console.log(percent);
+            }
+        });
+
+        // 带step的slider
+        var sliderStepValue = document.getElementById("sliderStepValue");
+        weui.slider('#sliderStep', {
+            step: 10,
+            defaultValue: 40,
+            onChange: function onChange(percent) {
+                sliderStepValue.innerHTML = Math.round(percent);
+                console.log(percent);
+            }
+        });
+
+        // 分块的slider
+        var sliderBlockValue = document.getElementById("sliderBlockValue");
+        weui.slider('#sliderBlock', {
+            step: 100 / 3,
+            defaultValue: 33.333,
+            onChange: function onChange(percent) {
+                sliderBlockValue.innerHTML = Math.round(percent);
+                console.log(percent);
+            }
+        });
+    }
+
+    setSlider()
+</script>
+</body>
+</html>

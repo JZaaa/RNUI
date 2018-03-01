@@ -1,0 +1,259 @@
+<div class="doc-middle">
+    <span class="tag tag-success tag-mark" title="第三方插件">lib</span>
+    <p class="text-danger small">详细用法请访问 minirefresh 项目地址：<a href="https://github.com/minirefresh/minirefresh" target="_blank" class="text-warning">https://github.com/minirefresh/minirefresh</a></p>
+    <p class="text-danger small">当数据结构较为复杂时，推荐使用vue模板来代替js数据拼接</p>
+    <h4 class="text-muted">代码演示</h4>
+    <div class="doc-panel">
+        <div class="doc-panel-body">
+            右侧提供点击内容后返回页面不刷新定位的一种实现方法,核心代码如下
+        </div>
+        <div class="doc-panel-footer">
+            <p class="text-muted">html</p>
+            <div class="copy-content">
+            <pre class="prettyprint lang-html linenums" id="foo">
+<div id="minirefresh" class="minirefresh-wrap">
+    <div class="minirefresh-scroll">
+        <p>利用sessionStorage等实现点击内容后返回不刷新定位，当前仅实现单列表</p>
+        <p style="color: red">由于利用sessionStorage将保存数据导入会与下拉刷新参数up.isAuto: true冲突，导致回退页面后会向后加载至少1个页面,所以后台必需添加判断是否数据是否已结束判定(传入读取page与总page比对,超出返回空数据)</p>
+        <ul class="data-list" id="listdata">
+        </ul>
+    </div>
+</div>
+            </pre>
+                <button class="btn-copy" data-clipboard-target="#foo" data-toggle="copy">
+                    <img class="clippy" src="./doc/js/clipboard/clippy.svg" alt="copy">
+                </button>
+            </div>
+            <p class="text-muted">js</p>
+            <div class="copy-content">
+            <pre class="prettyprint lang-javascript linenums pre-scrollable" id="foo1">
+
+//初始化页码
+var page = getUrlParams(window.location.href, 'page');
+page = page ? page - 1 : 0;
+
+
+//判断是否为浏览历史返回,是则加载缓存
+if (getUrlParams(window.location.href, 'history') == 1) {
+    var pageData = sessionStorage.getItem('pageData');
+    if (pageData) {
+        $('#listdata').append(pageData);
+        var pageViewId = document.querySelector('#' + sessionStorage.getItem('pageViewId'));
+        if (pageViewId) {
+            pageViewId.scrollIntoView();
+        }
+        page++;
+    }
+}
+
+//删除缓存数据
+sessionStorage.removeItem('pageData');
+sessionStorage.removeItem('pageViewId');
+
+//总页数
+var count;
+var miniRefresh = new MiniRefresh({
+    container: '#minirefresh',
+    down: {
+        callback: function() {
+            if (count == 0) {
+                window.location.reload();
+            } else {
+                doAjax('down');
+            }
+        }
+    },
+    up: {
+        isAuto: true,
+        callback: function () {
+            doAjax('up');
+        }
+    }
+});
+
+var doAjax = function (type) {
+    if (type == 'down') {
+        page = 1;
+    } else {
+        page ++;
+    }
+    if (page > count) {
+        miniRefresh.endUpLoading(true);// 结束上拉加载
+    } else {
+
+//下方为模拟ajax请求，实际业务请替换
+//由于利用sessionStorage将保存数据导入会与up.isAuto: true冲突，导致回退页面后会向后加载至少1个页面
+//所以后台必需添加判断是否数据是否已结束判定(传入读取page与总page比对,超出返回空数据)
+        let response = getData(page);
+        var arrLen = response.data.length;
+        count = response.count;
+        if (arrLen > 0) {
+            var html = '';
+            $.each(response.data, function (key, value) {
+                html += '<li class="list-item">' +
+                    '<a href="./minirefresh-demo-content.html?title=' + value.title + '" class="news-link" id="list-' + value.id + '">' +
+                    '<span class="news-title">' + value.title + '</span>' +
+                    '<span class="news-date">' + (new Date()).toLocaleString() + '</span>' +
+                    '</a>' +
+                    '</li>';
+            });
+            setTimeout(function () { // 使用 setTimeout 函数是方便演示的，你可以不用 setTimeout 函数
+
+                if (type == 'down') {
+                    $('#listdata').html('');
+                    $('#listdata').append(html);// DOM 插入数据
+
+
+                    miniRefresh.endDownLoading(true);// 结束下拉刷新
+                } else {
+                    $('#listdata').append(html);
+
+                    if (response.count <= page) {// 是否已取完数据页
+                        miniRefresh.endUpLoading(true);// 结束上拉加载
+                    } else {
+                        miniRefresh.endUpLoading(false);
+                    }
+                }
+                changeUrl(page);
+
+            }, 600);
+        } else {
+            if (type == 'down') {
+                $('#listdata').html('');
+                miniRefresh.endDownLoading(true);
+            } else {
+                miniRefresh.endUpLoading(true);
+            }
+        }
+
+// $.ajax({
+//     type: 'GET',
+//     url: '',
+//     data: {
+//         page: page,
+//         't': new Date().getTime()// 防止GET请求缓存
+//     },
+//     dataType: 'json',
+//     success: function (res) {
+//         if (res.success !== false) {
+//             count = res.count;
+//             if (count == 0) {
+//                 if (type == 'down') {
+//                     miniRefresh.endDownLoading(true);
+//                 } else {
+//                     miniRefresh.endUpLoading(true);
+//                 }
+//                 return;
+//             } else {
+//                 $('#minirefresh .downwrap-content').show();
+//             }
+//             var html = '';
+//             $.each(res.project, function (key, value) {
+//                 html += '';
+//             })
+//             if (type == 'down') {
+//                 $('#listdata').html('');
+//                 $('#listdata').append(html);// DOM 插入数据
+//                 miniRefresh.endDownLoading(true);// 结束下拉刷新
+//             } else {
+//                 $('#listdata').append(html);
+//                 if (res.count == page) {// 是否已取完数据页
+//                     miniRefresh.endUpLoading(true);// 结束上拉加载
+//                 } else {
+//                     miniRefresh.endUpLoading(false);
+//                 }
+//             }
+//         } else {
+//             if (type == 'down') {
+//                 $('#listdata .weui-panel__bd').html('');
+//                 miniRefresh.endDownLoading(true);
+//             } else {
+//                 miniRefresh.endUpLoading(true);
+//             }
+//         }
+//     }
+// })
+    }
+}
+
+//模拟ajax返回数据
+function getData(page) {
+    let currentPage = parseInt(page); //当前页数
+    let limit = 20; //每页数据
+    let count = 5; //总页数
+    let content = [];
+    if (page > count) {
+        return {
+            count: count,
+            data: content
+        };
+    }
+    for (let i = 1; i <= limit; i++) {
+        let number = limit * (currentPage - 1) + i;
+        content.push({id: number,title: number});
+    }
+    return {
+        count: count,
+        data: content
+    };
+}
+
+
+$('#listdata').on('click', 'a', function(e) {
+    e.preventDefault();
+    let $a = $(this);
+
+//添加history参数,区分是通过back回退还是重新进入
+    window.history.pushState({},'', updateUrlParams(window.location.href, 'history', 1));
+
+    sessionStorage.setItem('pageData', $('#listdata').html());
+    sessionStorage.setItem('pageViewId', $a.attr('id'));
+    window.location.href = $a.attr('href');
+})
+
+
+function changeUrl(page) {
+    var href = updateUrlParams(window.location.href, 'page', page);
+    window.history.pushState({},'', href);
+}
+
+
+//更改url参数
+function updateUrlParams(url, name, value) {
+    var r = url;
+    if (r != null && r != 'undefined' && r != "") {
+        value = encodeURIComponent(value);
+        var reg = new RegExp("(^|)" + name + "=([^&]*)(|$)");
+        var tmp = name + "=" + value;
+        if (url.match(reg) != null) {
+            r = url.replace(eval(reg), tmp);
+        }
+        else {
+            if (url.match("[\?]")) {
+                r = url + "&" + tmp;
+            } else {
+                r = url + "?" + tmp;
+            }
+        }
+    }
+    return r;
+}
+//获取参数
+function getUrlParams(url,m) {
+    var sValue = url.match(new RegExp("[\?\&]" + m + "=([^\&]*)(\&?)", "i"));
+    return sValue ? sValue[1] : sValue;
+}
+            </pre>
+                <button class="btn-copy" data-clipboard-target="#foo1" data-toggle="copy">
+                    <img class="clippy" src="./doc/js/clipboard/clippy.svg" alt="copy">
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="doc-right">
+    <div class="mobile-demo">
+        <iframe frameborder="0" src="./doc/example/minirefresh-demo.html"></iframe>
+    </div>
+</div>
