@@ -476,7 +476,7 @@ var prettyPrint;
       // undefined if they need not be capturing in the output.
       var capturedGroups = [];
 
-      // Walk over and identify back references to build the capturedGroups
+      // Walk over and identify back references to src the capturedGroups
       // mapping.
       for (var i = 0, groupIndex = 0; i < n; ++i) {
         var p = parts[i];
