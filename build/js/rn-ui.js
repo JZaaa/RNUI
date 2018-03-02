@@ -150,6 +150,87 @@
 
 
 /**
+ * 获取元素滑动状态
+ * slide[number] 最小移动距离，小于此距离视为不移动
+ * callback[function] 回调
+ */
++(function ($) {
+    'use strict';
+    $.fn.touchSlide = function (options) {
+
+        var defaults = {
+            slide: 10, //最小移动距离
+            callback: function (move, el) {
+            }
+        }
+        var $that = this;
+        var touchEvent = $.touchEvents;
+        $that.each(function () {
+            var $el = $(this);
+            var opts = $.extend({}, defaults, options);
+            var touchStart = false; //开始移动标志
+            var initial, final; //记录开始与结束位置
+            var move = {
+                x: 0,
+                y: 0,
+                touch: false
+            }; //移动距离
+            var p;
+
+            $el.on(touchEvent.start, function (e) {
+                move = {
+                    x: 0,
+                    y: 0,
+                    touch: false
+                } //重置状态
+                initial = $.getTouchPosition(e);
+                touchStart = initial;
+            })
+
+            $el.on(touchEvent.move, function (e) {
+                if (!touchStart) return;
+                final = $.getTouchPosition(e);
+                move.x = final.x - initial.x;
+                move.y = final.y - initial.y;
+                e.preventDefault();
+                e.stopPropagation();
+                if (Math.abs(move.x) < Math.abs(move.y)) {
+                    // 上下方向在拖动
+                    p = move.y;
+                    move.touch = 'y'
+                } else {
+                    //左右方向
+                    p = move.x;
+                    move.touch = 'x'
+                }
+
+                if (p == 0 || Math.abs(p) < opts.slide) {
+                    //未移动
+                    move.touch = false;
+                } else if (p < 0) {
+                    //左/上移
+                    move.touch = (move.touch == 'x') ? 'left' : 'top';
+                } else {
+                    //右/下移
+                    move.touch = (move.touch == 'x') ? 'right' : 'bottom';
+                }
+
+            })
+
+            $el.on(touchEvent.end, function (e) {
+                if (!touchStart) return;
+                touchStart = false;
+                return opts.callback(move, $el);
+            })
+        });
+
+        return $that;
+    }
+
+})(jQuery);
+
+
+/**
  * 滑动单元格
  * 默认初始化 .weui-cell_swiped的类
  * 手动初始化未$('.weui-cell_swiped').swipeout()
@@ -261,8 +342,6 @@
             }
         });
     }
-
-    // $('.weui-cell_swiped').swipeout() // auto init
 })(jQuery);
 
 
