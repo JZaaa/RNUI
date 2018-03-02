@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="../../lib/weui.min.css" />
     <link rel="stylesheet" type="text/css" href="../../doc/icon/iconfont.css" />
     <link rel="stylesheet" type="text/css" href="../../doc/css/demo.css" />
-    <link rel="stylesheet/less" type="text/css" href="../../build/less/rn-ui.less" />
+    <link rel="stylesheet/less" type="text/css" href="../../src/less/rn-ui.less" />
     <script src="../../lib/less.min.js" type="text/javascript"></script>
 </head>
 <body>
@@ -22,18 +22,20 @@
 </div>
 <div class="doc-panel-body">
     <p>&nbsp;</p>
-    <button type="button" class="weui-btn weui-btn_primary" onclick="actionSheet()">图片预览</button>
+    <button type="button" class="weui-btn weui-btn_primary" onclick="actionSheet(false)">图片预览,隐藏删除</button>
+    <button type="button" class="weui-btn weui-btn_primary" onclick="actionSheet(true)">图片预览,不隐藏删除</button>
 </div>
 
 <script src="../../lib/jquery.min.js"></script>
-<script src="../../build/js/rn-ui.js"></script>
+<script src="../../src/js/rn-ui.js"></script>
 <script src="../../lib/weui.js/dist/weui.js"></script>
 <script>
 
-    function actionSheet() {
+    function actionSheet(del) {
         let url = '../../doc/img/pic_article.png';
         let gallery = weui.gallery(url, {
             className: 'custom-classname',
+            delete: del,
             onDelete: function(){
                 weui.confirm('确定删除该图片？',
                     function(){

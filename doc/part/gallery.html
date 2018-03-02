@@ -1,6 +1,7 @@
 <div class="doc-middle">
 <span class="tag tag-success tag-mark" title="weui.js">weui.js</span>
-<p class="text-danger small">gallery 带删除按钮的图片预览，主要是配合图片上传使用</p>
+    <span class="tag tag-primary tag-mark" title="自定义">custom</span>
+    <p class="text-danger small">gallery 图片浏览,新增删除按钮隐藏</p>
 <h4 class="text-muted">代码演示</h4>
 <div class="doc-panel">
     <div class="doc-panel-footer">
@@ -10,6 +11,7 @@ function actionSheet() {
     let url = './doc/img/pic_article.png';
     let gallery = weui.gallery(url, {
         className: 'custom-classname',
+        delete: false, //默认为true，隐藏删除按钮
         onDelete: function(){
             weui.confirm('确定删除该图片？',
                 function(){
