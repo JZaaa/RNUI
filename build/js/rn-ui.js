@@ -145,6 +145,20 @@
         end: $.support.touch ? 'touchend' : 'mouseup'
     };
 
+    /**
+     * iphone8 与 iphoneX 有相同的agent, 所以需要使用window.screen判断
+     * @type {Function}
+     */
+    $.isIPhoneX = (function() {
+        return this.isIPhone() && (window.screen.width === 375 && window.screen.height === 812 || window.screen.width === 812 && window.screen.height === 375);
+    });
+
+    //是否为iphone
+    $.isIPhone = (function() {
+        return (/iPhone/i.test(navigator.userAgent));
+    });
+
+
 
 })(jQuery);
 
