@@ -7,7 +7,7 @@ var activeNav;
 //获取项目根目录
 function getRootPath() {
     let pathName = window.location.pathname.substring(1);
-    let webName = pathName === '' ? '' : pathName.substring(0, pathName.indexOf('/'));
+    let webName = pathName === '' ? '' : pathName.substring(0, pathName.lastIndexOf('/'));
     if (webName === "") {
         return window.location.protocol + '//' + window.location.host;
     }
