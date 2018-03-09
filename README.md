@@ -18,6 +18,8 @@
 - List 列表左滑
 - Toast 轻提示，新增多种提醒样式
 - TopTips 顶部提示，新增多种提醒样式
+- Gallery 图片预览，新增图片预览模式
+- LightBox 相册，新增多图浏览插件
 - [NiceValidator](https://github.com/niceue/nice-validator) 表单验证
 - [Swiper](https://github.com/nolimits4web/swiper) 轮播
 - [Minirefresh](https://github.com/minirefresh/minirefresh) 上拉刷新
