@@ -359,6 +359,155 @@
 })(jQuery);
 
 
+/**
+ * 多图查看,单图点击查看请使用 Gallery 方法
+ * 调用方法： $(selector).lightbox(options)
+ * options参数：
+ * item[string] 预览元素,默认img
+ * src[string] 图片地址,默认src
+ * loop[bool] 是否可循环,默认true
+ * speed 切换图片速度, 默认200
+ */
++(function ($) {
+    'use strict';
+
+    $.fn.lightbox = function (options) {
+        var defaults = {
+            item: 'img',
+            src: 'src',
+            loop: true,
+            speed: 200
+        }
+
+        var _rn_lightbox_tpl = "<div class=\"weui-gallery weui-animate-fade-in\" id=_rn_lightbox> <span class=weui-gallery__img ></span> <div class=weui-gallery__opr>  </div> </div> ";
+
+        //防止同一实例二次调用
+        var _rn_lightbox = false;
+
+        var opt = $.extend({}, defaults, options);
+
+        var $that = this;
+
+        var index = 0; //图片排序
+
+        var count = 0; //图片总数
+
+        var src; //当前图片路径
+
+        var img; //所有图片dom
+
+        var box, opr;
+
+        $that.each(function () {
+            var $el = $(this);
+
+            //点击图片事件
+            $el.on('click', opt.item, function(e) {
+                if (_rn_lightbox) {
+                    return _rn_lightbox;
+                }
+
+                _rn_lightbox = $(_rn_lightbox_tpl);
+
+                box = _rn_lightbox.find('.weui-gallery__img');
+                opr = _rn_lightbox.find('.weui-gallery__opr');
+
+                var $item = $(this);
+
+                img = $el.find(opt.item);
+
+                count = img.length;
+
+                //当前图片排序号
+                index = img.index(this);
+                src = $item.attr(opt.src);
+
+                //显示图像
+                _set();
+
+                //添加并显示图片
+                $('body').append(_rn_lightbox);
+                _rn_lightbox.show()
+
+                //动作监控
+                _rn_lightbox.touchSlide({
+                    callback: function (a, b) {
+                        var touch = a.touch;
+                        switch (touch) {
+                            case false:
+                                _hide();
+                                break;
+                            case 'left':
+                                _slide_left();
+                                break;
+                            case 'right':
+                                _slide_right();
+                                break;
+                        }
+                    }
+                })
+
+            })
+
+        })
+
+        //隐藏图片
+        function _hide() {
+            _rn_lightbox.addClass('weui-animate-fade-out')
+                .on('animationend webkitAnimationEnd', function () {
+                    _rn_lightbox.remove();
+                    _rn_lightbox = false;
+                });
+        }
+
+        function _set() {
+            box.css('background-image', 'url(' + src + ')');
+            opr.html((parseInt(index)+1) + '/' + count);
+        }
+
+        function _slider() {
+            box.fadeOut(opt.speed, function () {
+                _set();
+                box.fadeIn(opt.speed)
+            })
+        }
+
+
+        //左滑操作(前进)
+        function _slide_left() {
+            var n = parseInt(index) + 1;
+
+            if (opt.loop) {
+                index = (n < count) ? n : 0;
+            } else {
+                if (n >= count) {
+                    return;
+                }
+                index = n;
+            }
+            src = img.eq(index).attr(opt.src);
+            _slider();
+        }
+
+        //右滑操作(后退)
+        function _slide_right() {
+            var n = parseInt(index) - 1;
+            if (opt.loop) {
+                index = (n < 0) ? (count - 1) : n;
+            } else {
+                if (n < 0) {
+                    return;
+                }
+                index = n;
+            }
+            src = img.eq(index).attr(opt.src);
+            _slider();
+        }
+    }
+
+})(jQuery);
+
+
 
 
 
