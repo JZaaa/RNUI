@@ -1,0 +1,44 @@
+<div class="doc-middle">
+    <span class="tag tag-primary tag-mark" title="自定义">custom</span>
+    <p class="text-danger small">当前版本仅支持区域多图查看,单图查看请使用 <a onclick="goto('#gallery')" href="javascript:;" class="text-warning">【Gallery】</a>组件</p>
+    <h4 class="text-muted">代码演示</h4>
+    <div class="doc-panel">
+        <div class="doc-panel-footer">
+            <p class="text-muted">html</p>
+            <div class="copy-content">
+            <pre class="prettyprint lang-html linenums" id="foo">
+<div id="lightbox">
+    <p><img src="./doc/img/pic_article.png" width="200"></p>
+    <img src="./doc/img/vcode.jpg">
+</div>
+            </pre>
+                <button class="btn-copy" data-clipboard-target="#foo" data-toggle="copy">
+                    <img class="clippy" src="./doc/js/clipboard/clippy.svg" alt="copy">
+                </button>
+            </div>
+            <p class="text-muted">js</p>
+            <div class="copy-content">
+            <pre class="prettyprint lang-javascript linenums" id="foo1">
+$('#lightbox').lightbox({
+    item: 'img', //显示对象,默认为img
+    src: 'src', //对象路径,默认src
+    loop: true, //可循环切换
+    speed: 200 //切换速度
+})
+            </pre>
+                <button class="btn-copy" data-clipboard-target="#foo1" data-toggle="copy">
+                    <img class="clippy" src="./doc/js/clipboard/clippy.svg" alt="copy">
+                </button>
+            </div>
+        </div>
+</div>
+</div>
+<div class="doc-right">
+    <div class="mobile-demo">
+        <iframe frameborder="0" src="./doc/example/lightbox.html"></iframe>
+    </div>
+</div>
+
+
+
+

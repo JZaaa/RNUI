@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>demo</title>
+    <link rel="stylesheet" type="text/css" href="../../lib/weui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../doc/icon/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="../../doc/css/demo.css" />
+    <link rel="stylesheet/less" type="text/css" href="../../src/less/rn-ui.less" />
+    <script src="../../lib/less.min.js" type="text/javascript"></script>
+</head>
+<body>
+<div class="nav-bar shadow nav-bar-fixed">
+    <div class="nav-bar-title">标题</div>
+    <div class="nav-bar-right" onclick="javascript:location.reload();">
+        <span class="nav-bar-text">
+            刷新
+        </span>
+    </div>
+</div>
+<div class="doc-panel-body">
+    <div id="lightbox">
+        <p><img src="../../doc/img/pic_article.png" width="200"></p>
+        <img src="../../doc/img/vcode.jpg">
+    </div>
+</div>
+
+<script src="../../lib/jquery.min.js"></script>
+<script src="../../src/js/rn-ui.js"></script>
+<script src="../../lib/weui.js/dist/weui.js"></script>
+<script>
+    $('#lightbox').lightbox({
+        item: 'img', //显示对象,默认为img
+        src: 'src', //对象路径,默认src
+        loop: true, //可循环切换
+        speed: 200 //切换速度
+    })
+</script>
+</body>
+</html>
