@@ -167,9 +167,6 @@ img {
 .relative {
   position: relative;
 }
-.fixed {
-  position: fixed;
-}
 .hide {
   display: none;
 }
@@ -537,4 +534,33 @@ img {
   transition: -webkit-transform .3s;
   transition: transform .3s;
   transition: transform .3s, -webkit-transform .3s;
+}
+
+.divider {
+  border-bottom: .05rem solid rgba(0,0,0,.1);
+}
+
+/* table */
+.table {
+  width: 100%;
+  margin: 0 0 .5rem 0;
+  max-width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+}
+
+.table-detail tr>td:first-child {
+  border-color: #ddd!important;
+  background-color: #f1f1f1!important;
+  text-align: center;
+}
+
+.table.bordered td, .table.bordered th {
+  border: .05rem solid #ddd;
+}
+
+.table td, .table th {
+  padding: .5rem .5rem;
+  vertical-align: top;
+  border-bottom: .05rem solid rgba(0,0,0,.1);
 }
