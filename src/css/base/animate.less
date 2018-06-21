@@ -1,0 +1,96 @@
+// 动画效果
+// https://daneden.github.io/animate.css/
+
+.rn-animate {
+  animation-duration: .3s;
+  animation-timing-function: ease;
+  animation-fill-mode: forwards;
+}
+
+
+/*******************************
+           fade entry
+*******************************/
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.rn-fade-in {
+  animation-name: fadeIn;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.rn-fade-in-up {
+  animation-name: fadeInUp;
+}
+
+/*******************************
+           fade exits
+*******************************/
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+.rn-fade-out {
+  animation-name: fadeOut;
+}
+
+/*******************************
+           slide entry
+*******************************/
+@keyframes slideInUp {
+  from {
+    transform: translate3d(0, 100%, 0);
+    visibility: visible;
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.rn-slide-in-up {
+  animation-name: slideInUp;
+}
+
+/*******************************
+           slide exits
+*******************************/
+@keyframes slideOutDown {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    visibility: hidden;
+    transform: translate3d(0, 100%, 0);
+  }
+}
+
+.rn-slide-out-down {
+  animation-name: slideOutDown;
+}

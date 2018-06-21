@@ -1,0 +1,11 @@
+<div class="rn-bottom-panel-wrap">
+    <% if (mask){ %>
+    <div class="rn-mask <%= maskClass %>"></div>
+    <% } %>
+    <div class="rn-bottom-panel">
+        <% if (typeof title === 'string') { %>
+        <div class="title"><%= title %></div>
+        <% } %>
+        <div class="content <%= contentClass %>"></div>
+    </div>
+</div>

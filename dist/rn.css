@@ -1,0 +1,128 @@
+.rn-animate {
+  animation-duration: .3s;
+  animation-timing-function: ease;
+  animation-fill-mode: forwards;
+}
+/*******************************
+           fade entry
+*******************************/
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.rn-fade-in {
+  animation-name: fadeIn;
+}
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 100%, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+.rn-fade-in-up {
+  animation-name: fadeInUp;
+}
+/*******************************
+           fade exits
+*******************************/
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+.rn-fade-out {
+  animation-name: fadeOut;
+}
+/*******************************
+           slide entry
+*******************************/
+@keyframes slideInUp {
+  from {
+    transform: translate3d(0, 100%, 0);
+    visibility: visible;
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+.rn-slide-in-up {
+  animation-name: slideInUp;
+}
+/*******************************
+           slide exits
+*******************************/
+@keyframes slideOutDown {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    visibility: hidden;
+    transform: translate3d(0, 100%, 0);
+  }
+}
+.rn-slide-out-down {
+  animation-name: slideOutDown;
+}
+/* 公用类 */
+.rn-mask {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+}
+.rn-bottom-panel-wrap .rn-bottom-panel {
+  background-color: #fff;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1005;
+}
+.rn-bottom-panel-wrap .rn-bottom-panel .title {
+  padding: 5px;
+  font-size: 14px;
+  color: #808080;
+  text-align: center;
+}
+.rn-ripple {
+  display: block;
+  position: absolute;
+  pointer-events: none;
+  border-radius: 50%;
+  -webkit-transform: scale(0);
+  transform: scale(0);
+  background: #fff;
+  opacity: 1;
+}
+.rn-ripple-animate {
+  -webkit-animation: ripple;
+  animation: ripple;
+}
+@-webkit-keyframes ripple {
+  100% {
+    opacity: 0;
+    -webkit-transform: scale(2);
+    transform: scale(2);
+  }
+}
+@keyframes ripple {
+  100% {
+    opacity: 0;
+    -webkit-transform: scale(2);
+    transform: scale(2);
+  }
+}
