@@ -1,5 +1,6 @@
 # RN-UI 2 
-jQuery拓展插件, 目前主要补充weui.js组件功能
+jQuery拓展插件, 目前主要补充weui.js组件功能，请与weui.js/weui混合使用
+
 
 ## 安装
 ````
@@ -28,11 +29,10 @@ npm run dev
 npm run build
 ````
 
-
 ### 组件
 
-- rn.bottomPanel(options) 底部弹出面板
-- rn.backToTop(el, options) 返回顶部
-- rn.ripple(el, options) 波纹效果
+- [x] rn.bottomPanel(options) 底部弹出面板
+- [x] rn.backToTop(el, options) 返回顶部
+- [x] rn.ripple(el, options) 波纹效果
 
 
