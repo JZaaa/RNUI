@@ -63,9 +63,9 @@ export default function(el, options = {}) {
       }
 
       // 动画结束删除span
-      // $ripple.one('animationend webkitAnimationEnd oanimationend MSAnimationEnd', function() {
-      //   $(this).remove()
-      // })
+      $ripple.one('animationend webkitAnimationEnd oanimationend MSAnimationEnd', function() {
+        $(this).remove()
+      })
 
       // 设置动画与定位
       $ripple.css({

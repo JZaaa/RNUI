@@ -34,5 +34,5 @@ npm run build
 - [x] rn.bottomPanel(options) 底部弹出面板
 - [x] rn.backToTop(el, options) 返回顶部
 - [x] rn.ripple(el, options) 波纹效果
-
+- [x] rn.inputNumber(el, options) 数字步进器
 

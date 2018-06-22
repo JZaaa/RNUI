@@ -11,8 +11,11 @@
   <div id="app" >
     <div class="a" style="background: rosybrown;padding: 2px;margin: 3px">sdfsdf</div>
     <div class="a" style="background: red">sdfsdf</div>
-    <button id="test">test</button>
-    <button>test2</button>
+    <button id="inc">+</button>
+    <button id="dec">-</button>
+    <p>
+      <input class="input" type="text" data-max="5" data-min="-5" data-step="1.1" value="3" data-formatter="function(value) {return `${value}%`}" data-parser="function(value) {return value.toString().replace('%', '')}">
+    </p>
       <!-- 这里编写测试程序 -->
   </div>
   <script src="../vendor/jquery-2.2.4.js"></script>
