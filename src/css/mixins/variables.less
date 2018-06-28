@@ -1,0 +1,52 @@
+// Scaffolding
+@root-font-size: @theme-root-font-size;
+@rem: (1/20rem); // 1px root
+@text-default: @color-default;
+@bg-default: @color-white;
+@link-color: inherit;
+
+// Font 字体
+
+@font-family-base: @theme-font-family;
+
+@font-size-base: (14*@rem); // default 14px
+@font-size-small: (12*@rem);
+@font-size-large: (16*@rem);
+
+@small: 85%;
+
+@font-size-h1: (24*@rem);
+@font-size-h2: (20*@rem);
+@font-size-h3: (18*@rem);
+@font-size-h4: (16*@rem);
+@font-size-h5: (14*@rem);
+@font-size-h6: (12*@rem);
+
+@line-height-base: (20/14); // 1.42
+@line-height-rem: (20*@rem); // 1rem - 20px default
+
+// Borders 边框
+@border-color: rgba(0,0,0,.1);
+@border-with: (1*@rem);
+
+@border-radius-base: @theme-border-radius-base;
+@border-radius-large: @theme-border-radius-large;
+@border-radius-small: @theme-border-radius-small;
+
+// divider 分隔线
+@divider-color: @border-color;
+@divider-width: @border-with;
+
+// space 间距
+@space: @line-height-rem;
+@space-sm: (@space/1.5);
+@space-xs: (@space/3);
+@space-lg: (@space*1.5);
+@space-xl: (@space*2);
+
+// shadow 阴影
+@shadow-0:                  none;
+@shadow-1:                  rgba(0, 0, 0, .05) 0 (1*@rem) (4*@rem), rgba(0, 0, 0, .12) 0 (1*@rem) (2*@rem);
+@shadow-2:                  rgba(0, 0, 0, .12) 0 (1*@rem) (6*@rem), rgba(0, 0, 0, .15) 0 (1*@rem) (4*@rem);
+@shadow-3:                  rgba(0, 0, 0, .15) 0 (3*@rem) (10*@rem), rgba(0, 0, 0, .25) 0 (3*@rem) (10*@rem);
+@shadow-4:                  rgba(0, 0, 0, .188235) 0 (10*@rem) (30*@rem), rgba(0, 0, 0, .227451) 0 (6*@rem) (10*@rem);

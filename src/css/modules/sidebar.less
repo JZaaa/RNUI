@@ -1,0 +1,46 @@
+@import "../fn";
+@import "../mixins/animate";
+@import "../mixins/shadows";
+@import "../components/list";
+
+.rn-sidebar.is-open {
+  visibility: visible;
+}
+.rn-sidebar {
+  background-color: @bg-default;
+  width: 256px;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 0;
+  left: 0;
+  visibility: hidden;
+  z-index: 1005;
+  box-shadow: 0 8px 10px -5px rgba(0,0,0,.2), 0 16px 24px 2px rgba(0,0,0,.14), 0 6px 30px 5px rgba(0,0,0,.12);
+
+  .rn-title {
+    color: rgba(0,0,0,.87);
+    height: 40px;
+    padding: 10px;
+    z-index: 100;
+
+    .rn-title-text {
+      cursor: pointer;
+      line-height: 24px;
+      font-size: 24px;
+      color: rgba(0,0,0,.58);
+      font-weight: 500;
+      display: inline-block;
+    }
+
+    .rn-subtitle {
+      opacity: .5!important;
+      line-height: 1;
+      font-size: 12px;
+      margin-top: 4px;
+    }
+  }
+}
+

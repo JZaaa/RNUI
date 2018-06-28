@@ -1,21 +1,30 @@
-// import bp from '@/modules/bottomPanel/bottomPanel'
+// import BottomSheet from '../src/modules/bottomSheet'
+// import Ripple from '../src/modules/ripple'
+import InputNumber from '../src/modules/inputNumber'
 // import bt from '@/modules/backToTop/backToTop'
 // import rp from '@/modules/ripple/ripple'
-import inputNumber from '@/modules/inputNumber/inputNumber'
+// import inputNumber from '@/modules/inputNumber/inputNumber'
+// import sidebar from '@/modules/sidebar/sidebar'
+// import backTop from '../src/modules/backTop'
 
-inputNumber('.input',{
+const a = new InputNumber('input', {
   decrease: '#dec',
   increase: '#inc',
-  max: 7,
-  min: 6,
-  precision: 3,
-  onChange: function (val) {
-    console.log(val)
+  min: -1,
+  max: 5,
+  step: 1.1,
+  precision: 2,
+  formatter: undefined,
+  parser: undefined,
+  onChange: function(val) {
   }
 })
-$('.a').click(function () {
-  $('#input').prop('disabled', !$('#input').prop('disabled'))
-})
+// $('#sidebar').bottomSheet()
+// new Ripple('p')
+// $('#sidebar').backTop()
+// const a = new backTop('#sidebar', {
+//   showHeight: 10
+// })
 // rp('button')
 // rp('.a')
 
