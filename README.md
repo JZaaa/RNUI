@@ -36,3 +36,6 @@ npm run build
 - [x] Ripple(el, options) 波纹效果
 - [x] InputNumber(el, options) 数字步进器
 
+## 更新日志
+
+详情请查看 [changelog.md](./changelog.md)
