@@ -35,6 +35,7 @@ npm run build
 - [x] BackTop(el, options) 返回顶部
 - [x] Ripple(el, options) 波纹效果
 - [x] InputNumber(el, options) 数字步进器
+- [x] Sidebar(el, options) 侧边栏
 
 ## 更新日志
 

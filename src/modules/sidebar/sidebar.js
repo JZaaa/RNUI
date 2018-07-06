@@ -1,112 +1,101 @@
-import tpl from './sidebar.html'
 import $ from '../../tool/module-tool'
-import '@css/sidebar.less'
-
 /**
  * 侧边栏
- * @param options {object=} 配置项
- * @param options.append {boolean} 调用后是否添加至body内，false则关闭后删除
- * @param options.show {boolean} 默认是否显示
- * @param options.align {string} left|right 左/右侧边栏
- * @param options.locked {boolean} 是否锁定其他面板，true则会添加阴影层
- * @param options.width {string|number} 宽度
- * @param options.slot {boolean|object} 是否自定义内容
- * @param options.slot.el {object} 自定义内容选择器
- * @param options.slot.parent {object} 自定义内容父选择器(容器)
- * @param options.title {string|object} 侧边栏标题
- * @param options.className {string} 侧边栏自定义class
- * @param options.onClose {function} 关闭回调
- * @param options.items {array} 侧边栏内容
+ * options {object=} 配置项
+ * options.align {string} left|right 左/右侧边栏
+ * options.locked {boolean} 是否锁定其他面板，true则会添加阴影层
+ * options.onClose {function} 关闭回调
  */
-export default function(options = {}) {
-  options = $.extend({
-    slot: false,
-    append: true,
-    show: false,
+const Sidebar = (($) => {
+  const NAME = 'sidebar'
+  const VERSION = '1.0.0'
+  const DATA_KEY = 'rn.sidebar'
+  const Default = {
     align: 'left',
-    locked: true,
-    width: 'auto',
-    title: {
-      text: '',
-      subtitle: ''
-    },
-    items: [],
-    className: '',
-    onClick: function(res, event) {},
+    mask: true,
     onClose: function() {},
     onOpen: function() {}
-  }, options)
+  }
+  const DefaultType = {
+    align: 'string',
+    mask: 'boolean',
+    onClose: 'function',
+    onOpen: 'function'
+  }
+  const _getConfig = function(config) {
+    config = $.extend({}, Default, config)
+    $.typeCheckConfig(NAME, config, DefaultType)
+    return config
+  }
+  class Sidebar {
+    constructor(element, config) {
+      this._element = element
+      this._config = _getConfig(config)
+      this._$mask = $.mask()
+      const align = (this._config.align === 'right') ? 'rn-sidebar is-right' : 'rn-sidebar'
+      $(this._element).addClass(align)
+    }
+    static get VERSION() {
+      return VERSION
+    }
+    open(callback) {
+      $(this._element).addClass('is-open')
+      callback && callback()
+      this._config.onOpen && this._config.onOpen()
+      this._handleMask('open')
+    }
+    close(callback) {
+      $(this._element).removeClass('is-open')
+      callback && callback()
+      this._config.onClose && this._config.onClose()
+      this._handleMask('close')
+    }
+    toggle(callback) {
+      const open = $(this._element).hasClass('is-open')
+      if (open === false) {
+        this.open(callback)
+      } else {
+        this.close(callback)
+      }
+    }
+    _handleMask(type) {
+      if (this._config.mask === false) {
+        return
+      }
+      switch (type) {
+        case 'open':
+          this._$mask.appendTo('body').removeClass('rn-fade-out').addClass('rn-fade-in').one('click', (event) => this.close())
+          break
+        case 'close':
+          this._$mask.removeClass('rn-fade-in').addClass('rn-fade-out').one('animationend webkitAnimationEnd', (event) => {
+            this._$mask.remove()
+          })
+          break
+      }
+    }
+    static _jQueryInterface(config) {
+      if ($(this).length !== 1) {
+        throw new Error(`${NAME.toUpperCase()}: ` +
+            `The selector must be unique`)
+      }
+      let data = $(this).data(DATA_KEY)
+      const _config = $.extend({}, Default, config, $(this).data())
+      if (!data) {
+        data = new Sidebar(this, _config)
+        $(this).data(DATA_KEY, data)
+      }
 
-  // 默认模板
-  let $el, $mask, $sidebar
-  // 默认模板调用函数
-  const _self = {
-    _init: function() {
-      if ($mask) {
-        $mask.on('click', function() {
-          _self._close()
-        })
+      if (typeof config === 'string') {
+        if (typeof data[config] === 'undefined') {
+          throw new TypeError(`No method named "${config}"`)
+        }
+        data[config]()
       }
-      $sidebar.find('.rn-items').on('click', '.rn-item', function(event) {
-        const $this = $(this)
-        const index = $this.index()
-        options.items[index].onClick ? options.items[index].onClick.call($this, event) : options.onClick($this, event)
-      })
-      if (options.show) {
-        $sidebar.addClass('is-open')
-      }
-      if (options.append === true) {
-        $('body').append($el.hide())
-      }
-    },
-    _close: function() {
-      $sidebar.removeClass('is-open')
-      if (options.append === true) {
-        $sidebar.addClass('rn-fade-out')
-        $mask.addClass('rn-fade-out')
-        // $el.hide()
-      } else {
-        $el.remove()
-      }
-      _onClose()
-    },
-    _open: function() {
-      if (options.append === true) {
-        $el.show()
-      } else {
-        $('body').append($el)
-      }
-      $sidebar.addClass('is-open rn-animate rn-fade-in')
-      $mask.addClass('rn-animate rn-fade-in')
-      _onOpen()
+      return this
     }
   }
-  if (options.slot === false) {
-    const $wrap = $($.render(tpl, options))
-    $el = $wrap
-    $mask = $wrap.find('.rn-mask')
-    $sidebar = $wrap.find('.rn-sidebar')
-    _self._init()
-  }
-  function _onClose() {
-    options.onClose()
-  }
-  function _onOpen() {
-    options.onOpen()
-  }
-  function open() {
-    if (options.slot === false) {
-      _self._open()
-    }
-  }
-  function close() {
-    if (options.slot === false) {
-      _self._close()
-    }
-  }
-  return {
-    $sidebar,
-    open: open,
-    close: close
-  }
-}
+  $.fn[NAME] = Sidebar._jQueryInterface
+  $.fn[NAME].Constructor = Sidebar
+  return Sidebar
+})($)
+export default Sidebar

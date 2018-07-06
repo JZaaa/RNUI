@@ -26,7 +26,7 @@ $.extend({
   },
   // 遮罩层
   mask: function() {
-    return $('<div class="rn-mask"></div>')
+    return $('<div class="rn-mask rn-animate"></div>')
   },
   // https://github.com/twbs/bootstrap/blob/v4-dev/js/src/util.js
   // 类型检测
