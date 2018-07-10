@@ -1,12 +1,12 @@
 import tpl from './bottomSheet.html'
 import $ from '../../tool/module-tool'
+import Mask from '../mask'
 /**
  * 底部弹出面
  * 推荐：new BottomSheet(options)
  * $(selector).bottomSheet(options): 需保证selector 唯一
  * options {object}
  * options.maskClose {boolean} 点击遮罩是否关闭面板
- * options.maskClass {string} 添加遮罩class
  * options.contentClass {string} 添加面板class
  * options.title {string|boolean} 标题，内容为字符串时显示
  * options.onClose {function} 关闭时调用函数
@@ -15,11 +15,10 @@ import $ from '../../tool/module-tool'
  */
 const BottomSheet = (($) => {
   const NAME = 'bottomSheet'
-  const VERSION = '1.0.0'
+  const VERSION = '1.0.1'
   const DATA_KEY = 'rn.bottomSheet'
   const Default = {
     maskClose: true,
-    maskClass: '',
     contentClass: '',
     title: '标题',
     onClose: function() {},
@@ -27,7 +26,6 @@ const BottomSheet = (($) => {
   }
   const DefaultType = {
     maskClose: 'boolean',
-    maskClass: 'string',
     contentClass: 'string',
     title: '(string|boolean)',
     onClose: 'function',
@@ -44,7 +42,10 @@ const BottomSheet = (($) => {
     constructor(config) {
       this._config = _getConfig(config)
       this._$wrap = $($.render(tpl, this._config))
-      this._$mask = this._$wrap.find('.rn-mask')
+      this._mask = new Mask({
+        tapClose: this._config.maskClose,
+        onTapClose: () => this.close()
+      })
       this._$panel = this._$wrap.find('.rn-bottom-panel')
       this._init()
     }
@@ -52,16 +53,11 @@ const BottomSheet = (($) => {
       return VERSION
     }
     _init() {
-      if (this._config.maskClose) {
-        this._$mask.on('click', (event) => {
-          this.close()
-        })
-      }
-      $('body').append(this._$wrap).css('overflow', 'hidden')
+      $('body').append(this._$wrap)
+      this._mask.show()
       this._$panel.addClass('rn-slide-in-up rn-animate')
-      this._$mask.addClass('rn-fade-in rn-animate')
       return {
-        wrap: this._$mask,
+        wrap: this._$wrap,
         content: this._$panel.find('.content')
       }
     }
@@ -70,8 +66,7 @@ const BottomSheet = (($) => {
         return
       }
       this._$panel.addClass('rn-slide-out-down')
-      $('body').css('overflow', '')
-      this._$mask.addClass('rn-fade-out').one('animationend webkitAnimationEnd', (event) => {
+      this._mask.close(() => {
         this._$wrap.remove()
         this._config.onClose()
         callback && callback()

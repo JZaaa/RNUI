@@ -8,8 +8,8 @@
     <title>rn-js</title>
     <link rel="stylesheet" href="../dist/rn.css">
   </head>
-  <body style="background-color: #fff">
-  <div id="app" style="height: 800px;">
+  <body ontouchstart style="background-color: #fff">
+  <div id="app">
     <button id="test" style="position: fixed; top:150px">test</button>
     <button id="sidebar" style="position: fixed;left: 50%;">sidebar-open</button>
     <button id="inc">+</button>
@@ -116,7 +116,7 @@
       <!-- 这里编写测试程序 -->
   </div>
   <script src="../vendor/jquery-2.2.4.js"></script>
-  <script src="../dist/rn.min.js"></script>
+  <script src="../dist/rn.min.js?v=1"></script>
   <script>
     $('.input').inputNumber({
       increase: '#inc',
@@ -135,6 +135,7 @@
     $('#sidebar').click(function () {
       a.toggle()
     })
+    new rn.BottomSheet()
   </script>
   </body>
 </html>

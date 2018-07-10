@@ -1,4 +1,5 @@
 import $ from '../../tool/module-tool'
+import Mask from '../mask'
 /**
  * 侧边栏
  * options {object=} 配置项
@@ -8,7 +9,7 @@ import $ from '../../tool/module-tool'
  */
 const Sidebar = (($) => {
   const NAME = 'sidebar'
-  const VERSION = '1.0.0'
+  const VERSION = '1.0.1'
   const DATA_KEY = 'rn.sidebar'
   const Default = {
     align: 'left',
@@ -31,7 +32,9 @@ const Sidebar = (($) => {
     constructor(element, config) {
       this._element = element
       this._config = _getConfig(config)
-      this._$mask = $.mask()
+      this._mask = new Mask({
+        onTapClose: () => this.close()
+      })
       const align = (this._config.align === 'right') ? 'rn-sidebar is-right' : 'rn-sidebar'
       $(this._element).addClass(align)
     }
@@ -64,12 +67,10 @@ const Sidebar = (($) => {
       }
       switch (type) {
         case 'open':
-          this._$mask.appendTo('body').removeClass('rn-fade-out').addClass('rn-fade-in').one('click', (event) => this.close())
+          this._mask.show()
           break
         case 'close':
-          this._$mask.removeClass('rn-fade-in').addClass('rn-fade-out').one('animationend webkitAnimationEnd', (event) => {
-            this._$mask.remove()
-          })
+          this._mask.close()
           break
       }
     }

@@ -36,6 +36,7 @@ npm run build
 - [x] Ripple(el, options) 波纹效果
 - [x] InputNumber(el, options) 数字步进器
 - [x] Sidebar(el, options) 侧边栏
+- [x] Mask(options) 遮罩层
 
 ## 更新日志
 

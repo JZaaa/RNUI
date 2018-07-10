@@ -1,9 +1,12 @@
 import $ from './index'
+import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock'
 /**
  * jquery 拓展，引用此页面请勿引用jquery
  * 单例
  */
-
+const store = {
+  bodyLocked: false
+}
 const Util = {
   toType(obj) {
     return {}.toString.call(obj).match(/\s([a-z]+)/i)[1].toLowerCase()
@@ -24,10 +27,6 @@ $.extend({
         tpl.replace(/[\r\t\n]/g, ' ').split('<%').join('\t').replace(/((^|%>)[^\t]*)'/g, '$1\r').replace(/\t=(.*?)%>/g, '\',$1,\'').split('\t').join('\');').split('%>').join('p.push(\'').split('\r').join('\\\'') + '\');}return p.join(\'\');'
     return new Function(code).apply(data)
   },
-  // 遮罩层
-  mask: function() {
-    return $('<div class="rn-mask rn-animate"></div>')
-  },
   // https://github.com/twbs/bootstrap/blob/v4-dev/js/src/util.js
   // 类型检测
   typeCheckConfig(componentName, config, configTypes) {
@@ -42,6 +41,24 @@ $.extend({
               `but expected type "${expectedTypes}".`)
         }
       }
+    }
+  },
+  bodyLocked: function(locked) {
+    const body = document.getElementsByTagName('body')[0]
+    if (locked === true) {
+      if (store.bodyLocked) {
+        return
+      }
+      disableBodyScroll(body, {
+        reserveScrollBarGap: true
+      })
+      store.bodyLocked = true
+    } else {
+      enableBodyScroll(body, {
+        reserveScrollBarGap: true
+      })
+      clearAllBodyScrollLocks()
+      store.bodyLocked = false
     }
   }
 })

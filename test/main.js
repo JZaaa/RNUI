@@ -1,4 +1,4 @@
-// import BottomSheet from '../src/modules/bottomSheet'
+import BottomSheet from '../src/modules/bottomSheet'
 // import Ripple from '../src/modules/ripple'
 import InputNumber from '../src/modules/inputNumber'
 import Sidebar from "../src/modules/sidebar";
@@ -20,7 +20,7 @@ const a = $('#sidebar-box').sidebar({
 $('#sidebar').click(function () {
   $('#sidebar-box').sidebar('toggle')
 })
-// $('#sidebar').bottomSheet()
+$('#sidebar').bottomSheet()
 // new Ripple('p')
 // $('#sidebar').backTop()
 // const a = new backTop('#sidebar', {
