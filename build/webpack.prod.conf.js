@@ -5,6 +5,7 @@ const config = require('../config')
 const merge = require('webpack-merge')
 const baseWebpackConfig = require('./webpack.base.conf')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 
 const env = require('../config/prod.env')
 
@@ -104,6 +105,9 @@ const webpackConfig = merge(baseWebpackConfig, {
       },
       sourceMap: config.build.productionSourceMap,
       parallel: true
+    }),
+    new OptimizeCssAssetsPlugin({
+      cssProcessorOptions: { safe: true }
     })
   ]
 })
