@@ -1,7 +1,7 @@
 import $ from '../../tool/module-tool'
 /**
  * 点击波纹效果
- * new rn.Ripple(selector, options) | $(selector).options
+ * new rn.Ripple(selector, options) | $(selector).ripple(options)
  * 模块化： new Ripple(selector, options)
  * 注：使用此功能会改变目标元素 position: 'relative'
  * el 目标元素，必须

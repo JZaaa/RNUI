@@ -9,7 +9,7 @@ import $ from '../../tool/module-tool'
  * options.min {number} 最小值
  * options.max {number} 最大值
  * options.step {number} 步进值
- * options.precision {string} 最大精确位数
+ * options.precision {number} 最大精确位数
  * options.formatter {function} 输入框展示格式化函数
  * options.parser {function} 输入框解析函数，对应formatter，若设置formatter选项，则此项必须设置
  * options.onChange {function} 数值改变回调函数

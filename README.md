@@ -12,6 +12,15 @@ git clone git@github.com:JZaaa/RNUI.git
     <link rel="stylesheet" href="./dist/rn.css">
     <script type="text/javascript" src="./vendor/jquery-2.2.4.js"></script>
     <script type="text/javascript" src="./dist/rn.min.js"></script>
+    
+    <script>
+        // 推荐使用
+        const sidebar = new rn.Sidebar(el, options)
+        
+        // or
+        $(el).sidebar(options)
+        $(el).sidebar(action)
+    </script>
 ````
 
 ## 编译

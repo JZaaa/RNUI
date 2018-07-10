@@ -5,7 +5,7 @@ import $ from '../../tool/module-tool'
  * fixed 是否为绝对定位
  * style 添加样式
  * tapClose 点击自动关闭
- * onClick 自动关闭回调
+ * onTapClose 自动关闭回调
  * onClick 点击回调
  * @type {Mask}
  */

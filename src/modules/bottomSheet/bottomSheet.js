@@ -20,7 +20,7 @@ const BottomSheet = (($) => {
   const Default = {
     maskClose: true,
     contentClass: '',
-    title: '标题',
+    title: false,
     onClose: function() {},
     beforeClose: function() {}
   }

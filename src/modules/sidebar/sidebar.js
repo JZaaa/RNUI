@@ -4,8 +4,9 @@ import Mask from '../mask'
  * 侧边栏
  * options {object=} 配置项
  * options.align {string} left|right 左/右侧边栏
- * options.locked {boolean} 是否锁定其他面板，true则会添加阴影层
+ * options.mask {boolean} true则会添加阴影层
  * options.onClose {function} 关闭回调
+ * options.onOpen {function} 打开回调
  */
 const Sidebar = (($) => {
   const NAME = 'sidebar'
