@@ -15,7 +15,7 @@ $(selector).ripple(options)
 ### 参数
 
 | 参数      |    介绍 | 类型  | 可选值 | 默认值 |
-| :-------- | --------:| :--:|:--:   | :--: |
+| :--: | :--:| :--:|:--:   | :--: |
 | on  | jquery触发事件 |  string   | - | click |
 | opacity  | 波纹透明度 |  number   | - | 0.4 |
 | color  | 波纹颜色 |  string   | - | auto |
