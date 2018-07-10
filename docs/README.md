@@ -25,6 +25,7 @@ git clone git@github.com:JZaaa/RNUI.git
 
 ## 编译
 
+
 **安装依赖**
 ````
 npm install
@@ -43,7 +44,7 @@ npm run build
 ````
 
 
-### 组件
+## 组件
 
 - [x] BottomSheet(options) 底部弹出面板
 - [x] BackTop(el, options) 返回顶部
@@ -52,6 +53,3 @@ npm run build
 - [x] Sidebar(el, options) 侧边栏
 - [x] Mask(options) 遮罩层
 
-## 更新日志
-
-详情请查看 [changelog.md](changelog.md)
